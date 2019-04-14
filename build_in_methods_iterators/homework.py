@@ -14,7 +14,9 @@ def task_1_fix_names_start_letter(data: DT) -> DT:
         fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
-    pass
+    for info in data:
+        info['name'] = info['name'].title()
+    return data
 
 
 def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
@@ -25,7 +27,14 @@ def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
        remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
         >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
-    pass
+    try:
+        for point in redundant_keys:
+            for info in data:
+                del (info[point])
+    except KeyError:
+        pass
+    return data
+
 
 
 def task_3_find_item_via_value(data: DT, value) -> DT:
@@ -35,21 +44,26 @@ def task_3_find_item_via_value(data: DT, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
-    pass
+    data_new = []
+    for info in data:
+        if value in info.values():
+            data_new.append(info)
+    return data_new
 
 
 def task_4_min_value_integers(data: List[int]) -> int:
     """
     Find and return minimum value from list
     """
-    pass
+    return min(data)
 
 
 def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
     """
     Find the longest string
     """
-    pass
+    return min(data.split)
+
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -65,14 +79,15 @@ def task_7_max_value_list_of_lists(data: List[List[int]]) -> int:
     """
     Find max value from list of lists
     """
-    pass
+    data = [max(item) for item in data]
+    return max(data)
 
 
 def task_8_sum_of_ints(data: List[int]) -> int:
     """
     Find sum of all items in given list
     """
-    pass
+    return sum(data)
 
 
 def task_9_sum_characters_positions(text: str) -> int:
@@ -88,7 +103,10 @@ def task_9_sum_characters_positions(text: str) -> int:
         >>> 532
 
     """
-    pass
+    summa = 0
+    for piece in list(text):
+        summa += ord(piece)
+    return summa
 
 
 def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
