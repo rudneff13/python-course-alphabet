@@ -11,15 +11,14 @@
 #     return data
 
 data = [
-    {'age': 49, 'name': 'Roman'},
-    {'age': 36, 'name': 'Godzilla'},
-    {'age': 47, 'name': 'spike'},
-    {'age': 31, 'name': 'SuperMan'},
-    {'age': 49, 'name': 'Batman'},
+
+    {'age': 49, 'name': 'batman'},
     {'age': 37, 'name': 'cLaus'},
     {'age': 55, 'name': 'Frank'},
     {'age': 83, 'name': 'hOmer'}
 ]
 
-data = [{k: v.title() for (k, v) in info.items() for k['name']in info.items()} for info in data]
+data = [{k: v.title() if k == 'name' else v for k, v in info.items()} for info in data]
+
+
 print(data)
