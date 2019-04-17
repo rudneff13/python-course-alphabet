@@ -1,4 +1,6 @@
 from typing import List, Dict, Union, Generator
+import string
+import random
 
 # We will work with such dicts
 ST = Dict[str, Union[str, int]]
@@ -15,8 +17,9 @@ def task_1_fix_names_start_letter(data: DT) -> DT:
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
     for info in data:
-        info['name'] = info['name'].title()
+        info['name'] = info['name'].capitalize()
     return data
+
 
 
 def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
@@ -128,4 +131,4 @@ def task_11_create_list_of_random_characters() -> List[str]:
     Create list of 20 elements where each element is random letter from latin alphabet
 
     """
-    pass
+    return [random.choice(string.ascii_lowercase) for _ in range(20)]
