@@ -3,3 +3,4 @@
 # IDE files
 .idea
 __pycache__
+venv
