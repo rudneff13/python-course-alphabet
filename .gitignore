@@ -3,4 +3,8 @@
 # IDE files
 .idea
 __pycache__
+
 venv
+env
+virtualenv
+.gitignore
