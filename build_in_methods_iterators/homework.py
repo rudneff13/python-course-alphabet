@@ -37,7 +37,6 @@ def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
     return data
 
 
-
 def task_3_find_item_via_value(data: DT, value) -> DT:
     """
     Find and return all items that has @searching value in any key
@@ -68,7 +67,6 @@ def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
     Find the longest string
     """
     return min([str(i) for i in data], key=len) if data else None
-
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
