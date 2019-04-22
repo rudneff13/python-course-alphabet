@@ -11,3 +11,6 @@ for j in range(1, len(data)+1):
         newdict[j] = i
         j += 1
 print(newdict)
+
+
+123
