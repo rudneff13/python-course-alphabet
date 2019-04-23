@@ -142,6 +142,6 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
 def task_11_create_list_of_random_characters() -> List[str]:
     """
     Create list of 20 elements where each element is random letter from latin alphabet
-
+    Check... Check... Does it work? -> Dmitry
     """
     return [random.choice(string.ascii_lowercase) for _ in range(20)]
