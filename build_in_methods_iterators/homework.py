@@ -16,8 +16,15 @@ def task_1_fix_names_start_letter(data: DT) -> DT:
         fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
-    [info.update({'name': info.get('name').title() if type(info.get('name')) == str else info.get('name')})
-     for info in data]
+    # [info.update({'name': info.get('name').title() if type(info.get('name')) == str else info.get('name')})
+    #  for info in data]
+    # return data
+
+    for info in data:
+        if type(info.get('name')) == str:
+            info.update({'name': info.get('name').title()})
+        else:
+            info.get('name')
     return data
 
 
@@ -123,15 +130,13 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
         next(a)
         >>> 3
     """
-    def new_generator():
-        for num in range(1, 201):
-            if num > 1:
-                for i in range(2, num):
-                    if num % i == 0:
-                        break
-                else:
-                    yield num
-    return new_generator()
+    for num in range(1, 201):
+        if num > 1:
+            for i in range(2, num):
+                if num % i == 0:
+                    break
+            else:
+                yield num
 
 
 def task_11_create_list_of_random_characters() -> List[str]:
