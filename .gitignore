@@ -3,3 +3,9 @@
 # IDE files
 .idea
 __pycache__
+
+build_in_methods_iterators/venv
+env
+virtualenv
+.gitignore
+build_in_methods_iterators/work123.py
