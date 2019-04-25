@@ -138,7 +138,8 @@ def task_10_list_first_10_customers(cur):
 
     Results: 10 records
     """
-    cur.execute("SELECT * FROM customers WHERE customerid <= 10;")
+    # cur.execute("SELECT * FROM customers WHERE customerid <= 10;")
+    cur.execute("SELECT * FROM customers LIMIT 10;")
     return cur.fetchall()
 
 
@@ -151,7 +152,8 @@ def task_11_list_customers_starting_from_11th(cur):
 
     Returns: 11 records
     """
-    cur.execute("SELECT * FROM customers WHERE customerid > 11;")
+    # cur.execute("SELECT * FROM customers WHERE customerid > 11;")
+    cur.execute("SELECT * FROM customers OFFSET 11;")
     # in expected result: from 12 to 91
     return cur.fetchall()
 
@@ -194,7 +196,7 @@ def task_14_list_products_with_supplier_information(cur):
     Returns: 77 records
     """
     cur.execute('''SELECT productid, productname, unit, price, country, city, suppliername 
-                   FROM products, suppliers;''')
+                   FROM products, suppliers WHERE products.supplierid = suppliers.supplierid;''')
     return cur.fetchall()
 
 
@@ -207,7 +209,9 @@ def task_15_list_customers_with_any_order_or_not(cur):
 
     Returns: 213 records
     """
-    pass
+    cur.execute('''SELECT customername, contactname, country, orderid FROM customers 
+                   LEFT JOIN orders ON customers.customerid = orders.customerid;''')
+    return cur.fetchall()
 
 
 def task_16_match_all_customers_and_suppliers_by_country(cur):
@@ -219,4 +223,12 @@ def task_16_match_all_customers_and_suppliers_by_country(cur):
 
     Returns: 194 records
     """
-    pass
+    cur.execute('''SELECT customers.customername AS customername,
+                          customers.address AS address,
+                          customers.country AS customercountry,
+                          suppliers.country AS suppliercountry,
+                          suppliers.suppliername AS suppliername    
+                   FROM customers
+                   FULL JOIN suppliers ON customers.country = suppliers.country
+                   ORDER BY customers.country ASC NULLS LAST, suppliers.country;''')
+    return cur.fetchall()
