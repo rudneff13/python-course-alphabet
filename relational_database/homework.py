@@ -193,10 +193,10 @@ def task_14_list_products_with_supplier_information(cur):
 
     Returns: 77 records
     """
-    # cur.execute('''SELECT productid, productname, unit, price FROM products
-    #                    WHERE supplierid = (SELECT supplierid FROM suppliers WHERE country = 'Sweden');''')
-    # return cur.fetchall()
-    pass
+    cur.execute('''SELECT productid, productname, unit, price, country, city, suppliername 
+                   FROM products, suppliers;''')
+    return cur.fetchall()
+
 
 def task_15_list_customers_with_any_order_or_not(cur):
     """
