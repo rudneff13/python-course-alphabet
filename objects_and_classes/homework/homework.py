@@ -51,71 +51,86 @@ import constants as c
 import uuid
 from functools import reduce
 
+
 class Cesar:
-    def __init__(self, name, garages=0, register_id=hex):
+    def __init__(self, name, garages=0):
         self.name = str(name)
         self.garages = garages
         self.register_id = uuid.uuid4()
 
     def __str__(self):
-        return str(vars(self))
+        return f"""
+        Attributes of current Cesar:
+            name: '{self.name}';
+            total garages: '{len(self.garages)}';
+            register_id: '{self.register_id}';
+        """
 
     def __repr__(self):
-        return f"Cesar attributes are: '{vars(self)}'"
+        return f"""Cesar(name='{self.name}', garages='{len(self.garages)}')"""
 
     def hit_hat(self):
-        return sum([sum([Car.price for Car in Garage.cars]) for Garage in self.garages])
+        return sum([sum([car.price for car in garage.cars]) for garage in self.garages])
 
     def garages_count(self):
         return len(self.garages)
 
     def cars_count(self):
-        return sum([len([car for car in Garage.cars]) for Garage in self.garages])
+        return sum([len([car for car in garage.cars]) for garage in self.garages])
 
-    def add_car(self, new_car, Garage):
-        if Garage in self.garages:
-            if Garage.free_places() > 0:
-               Garage.cars.append(new_car)
+    def add_car(self, new_car, garage=None):
+        if garage is None:
+            max_free_garage = reduce((lambda x, y: x if x.free_places() > y.free_places() else y), self.garages)
+            if max_free_garage.free_places() > 0:
+                return max_free_garage.cars.append(new_car)
             else:
-                # max_free_garage = [Garage for Garage in self.garages
-                #         if Garage.free_places() == max(Garage.free_places() for Garage in self.garages)][0]
-                #
-                # return max_free_garage.cars.append(new_car)
-
-                max_free_garage = reduce((lambda x, y: x if x.free_places() > y.free_places() else y), self.garages)
-                if max_free_garage.free_places() > 0:
-                    return max_free_garage.cars.append(new_car)
-                else:
-                    print("You don't have enough free space for your car!")
+                print("There's no free space at your garages for your car!")
         else:
-            print("It's not your garage!")
+            if garage.free_places() > 0:
+               garage.cars.append(new_car)
+            else:
+                print("There's no free space at this garage for your car!")
 
-    def net_worth(self):
-        # summa = 0
-        # for Garage in self.garages:
-        #     for Car in Garage.cars:
-        #         summa += Car.price
-        # return summa
 
-        return sum([sum([Cars.price for Cars in Garage.cars]) for Garage in self.garages])
+
+        # if garage in self.garages:
+        #     if garage.free_places() > 0:
+        #        garage.cars.append(new_car)
+        #     else:
+        #         # max_free_garage = [garage for garage in self.garages
+        #         #         if garage.free_places() == max(garage.free_places() for garage in self.garages)][0]
+        #         #
+        #         # return max_free_garage.cars.append(new_car)
+        #
+        #         max_free_garage = reduce((lambda x, y: x if x.free_places() > y.free_places() else y), self.garages)
+        #         if max_free_garage.free_places() > 0:
+        #             return max_free_garage.cars.append(new_car)
+        #         else:
+        #             print("You don't have enough free space for your car!")
+        # else:
+        #     print("It's not your garage!")
 
     def __gt__(self, other):
-        return self.net_worth() > other.net_worth()
+        return self.hit_hat() > other.hit_hat()
 
     def __lt__(self, other):
-        return self.net_worth() < other.net_worth()
+        return self.hit_hat() < other.hit_hat()
 
     def __ge__(self, other):
-        return self.net_worth() >= other.net_worth()
+        return self.hit_hat() >= other.hit_hat()
 
     def __le__(self, other):
-        return self.net_worth() <= other.net_worth()
+        return self.hit_hat() <= other.hit_hat()
 
     def __eq__(self, other):
-        return self.net_worth() == other.net_worth()
+        return self.hit_hat() == other.hit_hat()
+
+    def __ne__(self, other):
+        return self.hit_hat() != other.hit_hat()
+
 
 class Car:
-    def __init__(self, price, type, producer, mileage, number=hex):
+    def __init__(self, price, type, producer, mileage):
         if type in c.CARS_TYPES and producer in c.CARS_PRODUCER:
             self.price = float(price)
             self.type = type
@@ -126,10 +141,17 @@ class Car:
             print('Unknown car type or producer')
 
     def __str__(self):
-        return str(vars(self))
+        return f"""
+        Attributes of current Car:
+            price: '{self.price}';
+            type: '{self.type}';
+            producer: '{self.producer}';
+            number: '{self.number}';
+            mileage: '{self.mileage}';
+        """
 
     def __repr__(self):
-        return f"Car attributes are: '{vars(self)}'"
+        return f"""Car(price='{self.price}', type='{self.type}', producer='{self.producer}', mileage='{self.mileage}')"""
 
     def __gt__(self, other):
         return self.price > other.price
@@ -146,12 +168,16 @@ class Car:
     def __eq__(self, other):
         return self.price == other.price
 
+    def __ne__(self, other):
+        return self.price != other.price
+
     def change_number(self, new_number):
         try:
             uuid.UUID(new_number, version=4)
             self.number = new_number
         except ValueError or AttributeError or TypeError:
             print("It's not UUID number!")
+
 
 class Garage:
 
@@ -165,17 +191,22 @@ class Garage:
             print('Unknown town name')
 
     def __str__(self):
-        return str(vars(self))
+        return f"""
+        Attributes of current Garage:
+            town: '{self.town}';
+            total cars: '{len(self.cars)}';
+            places: '{self.places}';
+            owner: '{self.owner}';
+        """
 
     def __repr__(self):
-        return f"Garage attributes are: '{vars(self)}'"
+        return f"""Garage(town='{self.town}', cars='{len(self.cars)}', places='{self.places}', owner='{self.owner}')"""
 
     def add_car(self, new_car):
         free_places = self.places - len(self.cars)
         if free_places > 0:
             free_places -= 1
             self.cars.append(new_car)
-            # print(free_places)
         else:
             print('Garage is full!')
 
@@ -187,25 +218,26 @@ class Garage:
             else:
                 self.cars.remove(new_car)
                 free_places += 1
-            # print(free_places)
         else:
             print('No such car in garage')
 
     def hit_hat(self):
-        return sum([Car.price for Car in self.cars])
+        return sum([car.price for car in self.cars])
 
     def free_places(self):
         return self.places - len(self.cars)
+
 
 if __name__ == "__main__":
 
     car1 = Car(1001, "Diesel", "BMW",  1123)
     car2 = Car(2000, "Crossover", "BENTLEY", 5422)
-    Garage1 = Garage('Kiev', [car1, car2], 2, "Lolka_owner")
-    Garage2 = Garage('Prague', [car2], 12, "Lolka_owner")
-    Garage3 = Garage('Prague', [car2, car1], 10, "Lolka_owner")
-    Cesar1 = Cesar("Crappy", [Garage1, Garage2, Garage3])
-    Cesar2 = Cesar("Another guy", [Garage1])
+    garage1 = Garage('Kiev', [car1, car2], 2, "Lolka_owner")
+    garage2 = Garage('Prague', [car2], 12, "Lolka_owner")
+    garage3 = Garage('Prague', [car2, car1], 10, "Lolka_owner")
+    cesar1 = Cesar("Crappy", [garage1, garage2, garage3])
+    cesar2 = Cesar("Another guy", [garage1])
+
 
     print(car1 > car2)
     print(car1)
@@ -213,26 +245,35 @@ if __name__ == "__main__":
     car1.change_number('c857fd34-b3e8-476a-833a-e38e1f928f6e')   #for example
     print(car1.number)
 
-    print(Garage3.cars)
-    Garage3.add_car(car1)
-    print(Garage3.cars)
-    Garage3.remove_car(car1)
-    print(Garage3.cars)
-    print(Garage3.hit_hat())
+    print(garage3.cars)
+    garage3.add_car(car1)
+    print(garage3.cars)
+    garage3.remove_car(car1)
+    print(garage3.cars)
+    print(garage3.hit_hat())
 
-    print(Cesar1.hit_hat())
-    print(Cesar1.garages_count())
-    print(Cesar1.cars_count())
+    print(cesar1.hit_hat())
+    print(cesar1.garages_count())
+    print(cesar1.cars_count())
 
-    print(Garage3.cars)
-    print(Garage2.cars)
-    print(Garage1.cars)
-    Cesar1.add_car(car1, Garage1)
-    print(Garage3.cars)
-    print(Garage2.cars)                             # you can see by amount of cars. In result Garage2 got extra car
-    print(Garage1.cars)                             # so each garage now includes 2 cars
+    print(garage3.cars)
+    print(garage2.cars)
+    print(garage1.cars)
+    cesar1.add_car(car1, garage1)
+    print(garage3.cars)
+    print(garage2.cars)                             # you can see by amount of cars. In result Garage2 got extra car
+    print(garage1.cars)                             # so each garage now includes 2 cars
 
-    Cesar2.add_car(car1, Garage1)
-    Cesar2.add_car(car1, Garage2)
+    cesar2.add_car(car1, garage1)
+    cesar2.add_car(car1, garage2)
 
-    print(Cesar1 >= Cesar2)
+    print(garage1)
+    print(garage2)
+    print(garage3)
+    cesar1.add_car(car1)
+    print(garage1)
+    print(garage2)
+    print(garage3)
+
+
+    print(cesar1 >= cesar2)
