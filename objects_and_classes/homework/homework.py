@@ -81,6 +81,8 @@ class Cesar:
     def add_car(self, new_car, garage=None):
         if garage is None:
             max_free_garage = reduce((lambda x, y: x if x.free_places() > y.free_places() else y), self.garages)
+            # max_free_garage = [garage for garage in self.garages
+            #                 if garage.free_places() == max(garage.free_places() for garage in self.garages)][0]
             if max_free_garage.free_places() > 0:
                 return max_free_garage.cars.append(new_car)
             else:
@@ -90,25 +92,6 @@ class Cesar:
                garage.cars.append(new_car)
             else:
                 print("There's no free space at this garage for your car!")
-
-
-
-        # if garage in self.garages:
-        #     if garage.free_places() > 0:
-        #        garage.cars.append(new_car)
-        #     else:
-        #         # max_free_garage = [garage for garage in self.garages
-        #         #         if garage.free_places() == max(garage.free_places() for garage in self.garages)][0]
-        #         #
-        #         # return max_free_garage.cars.append(new_car)
-        #
-        #         max_free_garage = reduce((lambda x, y: x if x.free_places() > y.free_places() else y), self.garages)
-        #         if max_free_garage.free_places() > 0:
-        #             return max_free_garage.cars.append(new_car)
-        #         else:
-        #             print("You don't have enough free space for your car!")
-        # else:
-        #     print("It's not your garage!")
 
     def __gt__(self, other):
         return self.hit_hat() > other.hit_hat()
