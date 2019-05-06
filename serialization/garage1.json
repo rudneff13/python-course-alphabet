@@ -1,0 +1,6 @@
+{
+    "__class__": "Garage",
+    "__module__": "__main__",
+    "town": "Kiev",
+    "cars": [
+        
