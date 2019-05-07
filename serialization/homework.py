@@ -23,6 +23,7 @@ from objects_and_classes.homework import constants as c
 import uuid
 from functools import reduce
 import json
+import pickle
 
 
 class Cesar:
@@ -250,23 +251,64 @@ if __name__ == "__main__":
     cesar2 = Cesar("Another guy", [garage1])
 
 
-# print('_____________________________Json dump/load_____________________________')
+# print('_____________________________json dump/load_____________________________')
+
 # with open('car1.json', 'w') as file:
 #     json.dump(car1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
 # with open('car1.json', 'r') as file:
 #     car1_from_file = json.load(file, object_hook=dict_to_obj)
 # print(car1_from_file)
 #
-# with open('cesar1.json', 'w') as file:
-#     json.dump(cesar1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
-# with open('cesar1.json', 'r') as file:
-#     cesar1_from_file = json.load(file, object_hook=dict_to_obj)
-# print(cesar1_from_file)
-#
 # with open('garage1.json', 'w') as file:
 #     json.dump(garage1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
 # with open('garage1.json', 'r') as file:
 #     garage1_from_file = json.load(file, object_hook=dict_to_obj)
 # print(garage1_from_file)
+#
+# with open('cesar1.json', 'w') as file:
+#     json.dump(cesar1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
+# with open('cesar1.json', 'r') as file:
+#     cesar1_from_file = json.load(file, object_hook=dict_to_obj)
+# print(cesar1_from_file)
 
 
+# print('_____________________________json dumps/loads_____________________________')
+
+# car1_with_dupms = json.dumps(car1.obj_to_dict(), cls=JsonEncoder, indent=4)
+# print(car1_with_dupms)
+# decoding_car1_with_loads = json.loads(car1_with_dupms, object_hook=dict_to_obj)
+# print(decoding_car1_with_loads)
+
+# garage1_with_dupms = json.dumps(garage1.obj_to_dict(), cls=JsonEncoder, indent=4)
+# print(garage1_with_dupms)
+# decoding_garage1_with_loads = json.loads(garage1_with_dupms, object_hook=dict_to_obj)
+# print(decoding_garage1_with_loads)
+
+# cesar1_with_dupms = json.dumps(cesar1.obj_to_dict(), cls=JsonEncoder, indent=4)
+# print(cesar1_with_dupms)
+# decoding_cesar1_with_loads = json.loads(cesar1_with_dupms, object_hook=dict_to_obj)
+# print(decoding_cesar1_with_loads)
+
+
+# print('_____________________________pickle_____________________________')
+
+# with open("car1.txt", "wb") as file:
+#     pickle.dump(car1, file)
+# with open("car1.txt", "rb") as file:
+#     restore_car1 = pickle.load(file)
+#     print(restore_car1)
+#
+# with open("garage1.txt", "wb") as file:
+#     pickle.dump(garage1, file)
+# with open("garage1.txt", "rb") as file:
+#     restore_garage1 = pickle.load(file)
+#     print(restore_garage1)
+#
+# with open("cesar1.txt", "wb") as file:
+#     pickle.dump(cesar1, file)
+# with open("cesar1.txt", "rb") as file:
+#     restore_cesar1 = pickle.load(file)
+#     print(restore_cesar1)
+
+
+# print('_____________________________yaml_____________________________')
