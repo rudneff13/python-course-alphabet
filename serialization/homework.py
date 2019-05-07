@@ -31,17 +31,6 @@ class Cesar:
         self.garages = garages
         self.register_id = register_id if register_id else uuid.uuid4()
 
-    def __str__(self):
-        return f"""
-        Attributes of current Cesar:
-            name: '{self.name}';
-            total garages: '{len(self.garages)}';
-            register_id: '{self.register_id}';
-        """
-
-    def __repr__(self):
-        return f"""Cesar(name='{self.name}', garages='{len(self.garages)}')"""
-
     def hit_hat(self):
         return sum([sum([car.price for car in garage.cars]) for garage in self.garages])
 
@@ -65,6 +54,30 @@ class Cesar:
                garage.cars.append(new_car)
             else:
                 print("There's no free space at this garage for your car!")
+
+    def obj_to_dict(self):
+        obj_dict = {
+            "__class__": self.__class__.__name__,
+            "__module__": self.__module__
+        }
+        obj_dict.update(self.__dict__)
+
+        garages_serialized = []
+        for garage in self.garages:
+            garages_serialized.append(garage.obj_to_dict())
+        obj_dict.update({'garages': garages_serialized})
+        return obj_dict
+
+    def __str__(self):
+        return f"""
+        Attributes of current Cesar:
+            name: '{self.name}';
+            total garages: '{len(self.garages)}';
+            register_id: '{self.register_id}';
+        """
+
+    def __repr__(self):
+        return f"""Cesar(name='{self.name}', garages='{len(self.garages)}')"""
 
     def __gt__(self, other):
         return self.hit_hat() > other.hit_hat()
@@ -95,6 +108,21 @@ class Car:
             self.mileage = float(mileage)
         else:
             print('Unknown car type or producer')
+
+    def change_number(self, new_number):
+        try:
+            uuid.UUID(new_number, version=4)
+            self.number = new_number
+        except (ValueError, AttributeError, TypeError):
+            print("It's not UUID number!")
+
+    def obj_to_dict(self):
+        obj_dict = {
+            "__class__": self.__class__.__name__,
+            "__module__": self.__module__
+        }
+        obj_dict.update(self.__dict__)
+        return obj_dict
 
     def __str__(self):
         return f"""
@@ -127,21 +155,6 @@ class Car:
     def __ne__(self, other):
         return self.price != other.price
 
-    def change_number(self, new_number):
-        try:
-            uuid.UUID(new_number, version=4)
-            self.number = new_number
-        except ValueError or AttributeError or TypeError:
-            print("It's not UUID number!")
-
-    def obj_to_dict(self):
-        obj_dict = {
-            "__class__": self.__class__.__name__,
-            "__module__": self.__module__
-        }
-        obj_dict.update(self.__dict__)
-        return obj_dict
-
 
 class Garage:
     def __init__(self, town, cars, places, owner=None):
@@ -152,18 +165,6 @@ class Garage:
             self.owner = owner
         else:
             print('Unknown town name')
-
-    def __str__(self):
-        return f"""
-        Attributes of current Garage:
-            town: '{self.town}';
-            total cars: '{len(self.cars)}';
-            places: '{self.places}';
-            owner: '{self.owner}';
-        """
-
-    def __repr__(self):
-        return f"""Garage(town='{self.town}', cars='{len(self.cars)}', places='{self.places}', owner='{self.owner}')"""
 
     def add_car(self, new_car):
         free_places = self.places - len(self.cars)
@@ -196,13 +197,24 @@ class Garage:
             "__module__": self.__module__
         }
         obj_dict.update(self.__dict__)
+
+        cars_serialized = []
+        for car in self.cars:
+            cars_serialized.append(car.obj_to_dict())
+        obj_dict.update({'cars': cars_serialized})
         return obj_dict
 
+    def __str__(self):
+        return f"""
+        Attributes of current Garage:
+            town: '{self.town}';
+            total cars: '{len(self.cars)}';
+            places: '{self.places}';
+            owner: '{self.owner}';
+        """
 
-    
-
-
-
+    def __repr__(self):
+        return f"""Garage(town='{self.town}', cars='{len(self.cars)}', places='{self.places}', owner='{self.owner}')"""
 
 
 class JsonEncoder(json.JSONEncoder):
@@ -231,25 +243,26 @@ if __name__ == "__main__":
 
     car1 = Car(1001, "Diesel", "BMW",  1123)
     car2 = Car(2000, "Crossover", "BENTLEY", 5422)
-    garage1 = Garage('Kiev', [car1, car2], 2, "Lolka_owner")
-    garage2 = Garage('Prague', [car2], 12, "Lolka_owner")
-    garage3 = Garage('Prague', [car2, car1], 10, "Lolka_owner")
+    garage1 = Garage('Kiev', [car1, car2], 2, )
+    garage2 = Garage('Prague', [car2], 12, )
+    garage3 = Garage('Prague', [car2, car1], 10, )
     cesar1 = Cesar("Crappy", [garage1, garage2, garage3])
     cesar2 = Cesar("Another guy", [garage1])
 
 
+# print('_____________________________Json dump/load_____________________________')
 # with open('car1.json', 'w') as file:
 #     json.dump(car1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
 # with open('car1.json', 'r') as file:
 #     car1_from_file = json.load(file, object_hook=dict_to_obj)
 # print(car1_from_file)
-
+#
 # with open('cesar1.json', 'w') as file:
-#     json.dump(obj_to_dict(cesar1), file, cls=JsonEncoder, indent=4)
+#     json.dump(cesar1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
 # with open('cesar1.json', 'r') as file:
 #     cesar1_from_file = json.load(file, object_hook=dict_to_obj)
 # print(cesar1_from_file)
-
+#
 # with open('garage1.json', 'w') as file:
 #     json.dump(garage1.obj_to_dict(), file, cls=JsonEncoder, indent=4)
 # with open('garage1.json', 'r') as file:
@@ -257,8 +270,3 @@ if __name__ == "__main__":
 # print(garage1_from_file)
 
 
-# print(car1.__dict__)
-# print("""
-#
-# """)
-# print(garage1.__dict__)

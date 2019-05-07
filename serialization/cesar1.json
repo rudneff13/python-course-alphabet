@@ -3,4 +3,78 @@
     "__module__": "__main__",
     "name": "Crappy",
     "garages": [
-        
+        {
+            "__class__": "Garage",
+            "__module__": "__main__",
+            "town": "Kiev",
+            "cars": [
+                {
+                    "__class__": "Car",
+                    "__module__": "__main__",
+                    "price": 1001.0,
+                    "type": "Diesel",
+                    "producer": "BMW",
+                    "number": "2af72103b1c84f86bc147ea37574984e",
+                    "mileage": 1123.0
+                },
+                {
+                    "__class__": "Car",
+                    "__module__": "__main__",
+                    "price": 2000.0,
+                    "type": "Crossover",
+                    "producer": "BENTLEY",
+                    "number": "f1d248cfdef74562affbfefd1152befe",
+                    "mileage": 5422.0
+                }
+            ],
+            "places": 2,
+            "owner": null
+        },
+        {
+            "__class__": "Garage",
+            "__module__": "__main__",
+            "town": "Prague",
+            "cars": [
+                {
+                    "__class__": "Car",
+                    "__module__": "__main__",
+                    "price": 2000.0,
+                    "type": "Crossover",
+                    "producer": "BENTLEY",
+                    "number": "f1d248cfdef74562affbfefd1152befe",
+                    "mileage": 5422.0
+                }
+            ],
+            "places": 12,
+            "owner": null
+        },
+        {
+            "__class__": "Garage",
+            "__module__": "__main__",
+            "town": "Prague",
+            "cars": [
+                {
+                    "__class__": "Car",
+                    "__module__": "__main__",
+                    "price": 2000.0,
+                    "type": "Crossover",
+                    "producer": "BENTLEY",
+                    "number": "f1d248cfdef74562affbfefd1152befe",
+                    "mileage": 5422.0
+                },
+                {
+                    "__class__": "Car",
+                    "__module__": "__main__",
+                    "price": 1001.0,
+                    "type": "Diesel",
+                    "producer": "BMW",
+                    "number": "2af72103b1c84f86bc147ea37574984e",
+                    "mileage": 1123.0
+                }
+            ],
+            "places": 10,
+            "owner": null
+        }
+    ],
+    "register_id": "81a27a93d05941b9ab8b47127bb04c9a"
+}
