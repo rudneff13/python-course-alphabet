@@ -1,0 +1,40 @@
+!!python/object:__main__.Cesar
+garages:
+- !!python/object:__main__.Garage
+  cars:
+  - &id003 !!python/object:__main__.Car
+    mileage: 1123.0
+    number: !!python/object:uuid.UUID
+      int: 86066850348651476716943241400800070077
+      is_safe: &id001 !!python/object/apply:uuid.SafeUUID [null]
+    price: 1001.0
+    producer: BMW
+    type: Diesel
+  - &id002 !!python/object:__main__.Car
+    mileage: 5422.0
+    number: !!python/object:uuid.UUID
+      int: 255264742901372303880413358578842690350
+      is_safe: *id001
+    price: 2000.0
+    producer: BENTLEY
+    type: Crossover
+  owner: null
+  places: 2
+  town: Kiev
+- !!python/object:__main__.Garage
+  cars:
+  - *id002
+  owner: null
+  places: 12
+  town: Prague
+- !!python/object:__main__.Garage
+  cars:
+  - *id002
+  - *id003
+  owner: null
+  places: 10
+  town: Prague
+name: Crappy
+register_id: !!python/object:uuid.UUID
+  int: 147580044350929999678668642519264869797
+  is_safe: *id001

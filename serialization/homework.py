@@ -24,6 +24,8 @@ import uuid
 from functools import reduce
 import json
 import pickle
+from ruamel.yaml import YAML
+import configparser
 
 
 class Cesar:
@@ -312,3 +314,34 @@ if __name__ == "__main__":
 
 
 # print('_____________________________yaml_____________________________')
+
+# yaml = YAML(typ='unsafe')
+
+# with open("car1.yaml", "w") as file:
+#     yaml.dump(car1, file)
+# with open("car1.yaml", "r") as file:
+#     car1_with_yaml = yaml.load(file)
+# print(car1_with_yaml)
+
+# with open("garage1.yaml", "w") as file:
+#     yaml.dump(garage1, file)
+# with open("garage1.yaml", "r") as file:
+#     garage1_with_yaml = yaml.load(file)
+# print(garage1_with_yaml)
+
+# with open("cesar1.yaml", "w") as file:
+#     yaml.dump(cesar1, file)
+# with open("cesar1.yaml", "r") as file:
+#     cesar1_with_yaml = yaml.load(file)
+# print(cesar1_with_yaml)
+
+
+# print('_____________________________INI_____________________________')
+
+# config = configparser.ConfigParser(car1.obj_to_dict())
+#
+# with open('car1.ini', 'w') as configfile:
+#     config.write(configfile)
+
+
+# HOW TO READ IT NOW???
