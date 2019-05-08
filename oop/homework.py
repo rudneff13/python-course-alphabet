@@ -39,7 +39,7 @@ class Cat:
     """
 
     def __init__(self, age):
-        pass
+        self.age = age
 
     def eat(self, product):
         pass
@@ -62,6 +62,8 @@ class Cat:
     def get_average_speed(self):
         pass
 
+    average_speed = _set_average_speed()
+    saturation_level = 50
 
 class Cheetah:
     """
