@@ -335,13 +335,3 @@ if __name__ == "__main__":
 #     cesar1_with_yaml = yaml.load(file)
 # print(cesar1_with_yaml)
 
-
-# print('_____________________________INI_____________________________')
-
-# config = configparser.ConfigParser(car1.obj_to_dict())
-#
-# with open('car1.ini', 'w') as configfile:
-#     config.write(configfile)
-
-
-# HOW TO READ IT NOW???
