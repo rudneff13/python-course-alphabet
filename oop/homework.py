@@ -1,158 +1,158 @@
 import math as m
 
 
-# class Cat:
-#     """
-#     Write Class Cat which will receive age from user
-#     * Add to class average_speed variable which will get it's values
-#       from private method _set_average_speed()
-#
-#     * Add to class saturation_level variable with value 50
-#
-#     * Implement private methods _increase_saturation_level and _reduce_saturation_level
-#       that will receive value and add/subtract from saturation_level this value
-#       if saturation_level is less than 0, return 0
-#       if saturation_level is grosser than 100, return 100
-#
-#     * Implement method eat which will receive from user product value
-#       if product eq fodder use _increase_saturation_level with value eq 10
-#       if product eq apple use _increase_saturation_level with value eq 5
-#       if product eq milk use _increase_saturation_level with value eq 2
-#
-#     * Implement private method _set_average_speed
-#       if age less or eq 7 return 12
-#       if age between 7(not including) and 10(including) return 9
-#       if age grosser than 10(not including) return 6
-#
-#     * Implement method run it receives hours value
-#       Calculate run km per hours remember that you have average_speed value
-#       Than if your cat run less or eq than 25 _reduce_saturation_level with value 2
-#       if it runs between 25(not including) and 50(including) than _reduce_saturation_level with value 5
-#       if it runs between 50(not including) and 100(including) than _reduce_saturation_level with value 15
-#       if it runs between 100(not including) and 200(including) than _reduce_saturation_level with value 25
-#       if it runs more than 200(not including) than _reduce_saturation_level with value 50
-#
-#       return text like this: f"Your cat ran {ran_km} kilometers"
-#
-#     * Implement get_saturation_level and return saturation_level
-#       if saturation_level eq 0 return text like this: "Your cat is died :("
-#
-#     * Implement get_average_speed and return average_speed
-#
-#     """
-#
-#     def __init__(self, age):
-#         self.age = age
-#         self.average_speed = self._set_average_speed()
-#         self.saturation_level = 50
-#
-#     def eat(self, product):
-#         product_dict = {
-#             'fodder': 10,
-#             'apple': 5,
-#             'milk': 2,
-#         }
-#         if product in product_dict.keys():
-#             self.saturation_level = [self._increase_saturation_level(v)
-#                                      for k, v in product_dict.items() if product == k][0]
-#         return self.saturation_level
-#
-#     def _reduce_saturation_level(self, value):
-#         self.saturation_level -= value
-#         if self.saturation_level < 0:
-#             self.saturation_level = 0
-#             return self.saturation_level
-#         else:
-#             return self.saturation_level
-#
-#     def _increase_saturation_level(self, value):
-#         self.saturation_level += value
-#         if self.saturation_level > 100:
-#             self.saturation_level = 100
-#             return self.saturation_level
-#         else:
-#             return self.saturation_level
-#
-#     def _set_average_speed(self):
-#         if self.age <= 7:
-#             self.average_speed = 12
-#         if 7 < self.age <= 10:
-#             self.average_speed = 9
-#         if self.age > 10:
-#             self.average_speed = 6
-#         return self.average_speed
-#
-#     def get_saturation_level(self):
-#         if self.saturation_level == 0:
-#             return "Your cat is died :("
-#         else:
-#             return self.saturation_level
-#
-#     def run(self, hours):
-#         if self.saturation_level > 0:
-#             ran_km = self.average_speed * hours
-#             if 0 < ran_km <= 25:
-#                 self._reduce_saturation_level(2)
-#             if 25 < ran_km <= 50:
-#                 self._reduce_saturation_level(5)
-#             if 50 < ran_km <= 100:
-#                 self._reduce_saturation_level(15)
-#             if 100 < ran_km <= 200:
-#                 self._reduce_saturation_level(25)
-#             if 200 < ran_km:
-#                 self._reduce_saturation_level(50)
-#             self.get_saturation_level()
-#             print(f"Your cat ran {ran_km} kilometers")
-#         else:
-#             print("Your cat can't run, it is still dead.")
-#
-#     def get_average_speed(self):
-#         return self.average_speed
-#
-#     def __str__(self):
-#         return f"""
-#     Current cat is {self.age} years old.
-#         """
-#
-#
-# class Cheetah(Cat):
-#     """
-#     * Inherit from class Cat
-#
-#     * Redefine method eat from parent class it will receive product value
-#       if product eq gazelle use _increase_saturation_level from parent class with value 30
-#       if product eq rabbit use _increase_saturation_level from parent class with value 15
-#
-#     * Redefine method _set_average_speed
-#       if age less or eq 5 return 90
-#       if age between 5 and 15(including) return 75
-#       if age grosser 15(not including) return 40
-#
-#     """
-#
-#     def eat(self, product):
-#         product_dict = {
-#             'gazelle': 30,
-#             'rabbit': 15,
-#         }
-#         if product in product_dict.keys():
-#             self.saturation_level = [self._increase_saturation_level(v)
-#                                      for k, v in product_dict.items() if product == k][0]
-#         return self.saturation_level
-#
-#     def _set_average_speed(self):
-#         if self.age <= 5:
-#             self.average_speed = 90
-#         if 5 < self.age <= 15:
-#             self.average_speed = 75
-#         if self.age > 15:
-#             self.average_speed = 40
-#         return self.average_speed
-#
-#     def __str__(self):
-#         return f"""
-#     Current cheetah is {self.age} years old.
-#         """
+class Cat:
+    """
+    Write Class Cat which will receive age from user
+    * Add to class average_speed variable which will get it's values
+      from private method _set_average_speed()
+
+    * Add to class saturation_level variable with value 50
+
+    * Implement private methods _increase_saturation_level and _reduce_saturation_level
+      that will receive value and add/subtract from saturation_level this value
+      if saturation_level is less than 0, return 0
+      if saturation_level is grosser than 100, return 100
+
+    * Implement method eat which will receive from user product value
+      if product eq fodder use _increase_saturation_level with value eq 10
+      if product eq apple use _increase_saturation_level with value eq 5
+      if product eq milk use _increase_saturation_level with value eq 2
+
+    * Implement private method _set_average_speed
+      if age less or eq 7 return 12
+      if age between 7(not including) and 10(including) return 9
+      if age grosser than 10(not including) return 6
+
+    * Implement method run it receives hours value
+      Calculate run km per hours remember that you have average_speed value
+      Than if your cat run less or eq than 25 _reduce_saturation_level with value 2
+      if it runs between 25(not including) and 50(including) than _reduce_saturation_level with value 5
+      if it runs between 50(not including) and 100(including) than _reduce_saturation_level with value 15
+      if it runs between 100(not including) and 200(including) than _reduce_saturation_level with value 25
+      if it runs more than 200(not including) than _reduce_saturation_level with value 50
+
+      return text like this: f"Your cat ran {ran_km} kilometers"
+
+    * Implement get_saturation_level and return saturation_level
+      if saturation_level eq 0 return text like this: "Your cat is died :("
+
+    * Implement get_average_speed and return average_speed
+
+    """
+
+    def __init__(self, age):
+        self.age = age
+        self.average_speed = self._set_average_speed()
+        self.saturation_level = 50
+
+    def eat(self, product):
+        product_dict = {
+            'fodder': 10,
+            'apple': 5,
+            'milk': 2,
+        }
+        if product in product_dict.keys():
+            self.saturation_level = [self._increase_saturation_level(v)
+                                     for k, v in product_dict.items() if product == k][0]
+        return self.saturation_level
+
+    def _reduce_saturation_level(self, value):
+        self.saturation_level -= value
+        if self.saturation_level < 0:
+            self.saturation_level = 0
+            return self.saturation_level
+        else:
+            return self.saturation_level
+
+    def _increase_saturation_level(self, value):
+        self.saturation_level += value
+        if self.saturation_level > 100:
+            self.saturation_level = 100
+            return self.saturation_level
+        else:
+            return self.saturation_level
+
+    def _set_average_speed(self):
+        if self.age <= 7:
+            self.average_speed = 12
+        if 7 < self.age <= 10:
+            self.average_speed = 9
+        if self.age > 10:
+            self.average_speed = 6
+        return self.average_speed
+
+    def get_saturation_level(self):
+        if self.saturation_level == 0:
+            return "Your cat is died :("
+        else:
+            return self.saturation_level
+
+    def run(self, hours):
+        if self.saturation_level > 0:
+            ran_km = self.average_speed * hours
+            if 0 < ran_km <= 25:
+                self._reduce_saturation_level(2)
+            if 25 < ran_km <= 50:
+                self._reduce_saturation_level(5)
+            if 50 < ran_km <= 100:
+                self._reduce_saturation_level(15)
+            if 100 < ran_km <= 200:
+                self._reduce_saturation_level(25)
+            if 200 < ran_km:
+                self._reduce_saturation_level(50)
+            self.get_saturation_level()
+            print(f"Your cat ran {ran_km} kilometers")
+        else:
+            print("Your cat can't run, it is still dead.")
+
+    def get_average_speed(self):
+        return self.average_speed
+
+    def __str__(self):
+        return f"""
+    Current cat is {self.age} years old.
+        """
+
+
+class Cheetah(Cat):
+    """
+    * Inherit from class Cat
+
+    * Redefine method eat from parent class it will receive product value
+      if product eq gazelle use _increase_saturation_level from parent class with value 30
+      if product eq rabbit use _increase_saturation_level from parent class with value 15
+
+    * Redefine method _set_average_speed
+      if age less or eq 5 return 90
+      if age between 5 and 15(including) return 75
+      if age grosser 15(not including) return 40
+
+    """
+
+    def eat(self, product):
+        product_dict = {
+            'gazelle': 30,
+            'rabbit': 15,
+        }
+        if product in product_dict.keys():
+            self.saturation_level = [self._increase_saturation_level(v)
+                                     for k, v in product_dict.items() if product == k][0]
+        return self.saturation_level
+
+    def _set_average_speed(self):
+        if self.age <= 5:
+            self.average_speed = 90
+        if 5 < self.age <= 15:
+            self.average_speed = 75
+        if self.age > 15:
+            self.average_speed = 40
+        return self.average_speed
+
+    def __str__(self):
+        return f"""
+    Current cheetah is {self.age} years old.
+        """
 
 
 class Wall:
@@ -333,18 +333,18 @@ class House:
         self.__door = None
 
     def create_wall(self, width, height):
-        if width or height == 0:
-            raise ValueError("Value must be not 0")
-        else:
-            if len(self.__walls) < 4:
-                new_wall = Wall(width, height)
-                return self.__walls.append(new_wall)
+        if len(self.__walls) < 4:
+            if (width and height) == 0:
+                raise ValueError("Value must be not 0")
             else:
-                raise ValueError("Our house can not have more than 4 walls")
+                new_wall = Wall(width, height)
+                self.__walls.append(new_wall)
+        else:
+            raise ValueError("Our house can not have more than 4 walls")
 
     def create_roof(self, width, height, roof_type):
         if self.__roof is None:
-            if width or height == 0:
+            if (width and height) == 0:
                 raise ValueError("Value must be not 0")
             else:
                 new_roof = Roof(width, height, roof_type)
@@ -354,7 +354,7 @@ class House:
             raise ValueError("The house can not have two roofs")
 
     def create_window(self, width, height):
-        if width or height == 0:
+        if (width and height) == 0:
             raise ValueError("Value must be not 0")
         else:
             new_window = Window(width, height)
@@ -362,7 +362,7 @@ class House:
 
     def create_door(self, width, height):
         if self.__door is None:
-            if width or height == 0:
+            if (width and height) == 0:
                 raise ValueError("Value must be not 0")
             else:
                 new_door = Door(width, height)
@@ -377,29 +377,34 @@ class House:
     def get_count_of_windows(self):
         return len(self.__windows)
 
-    def get_door_price(self):
-        pass
+    def get_door_price(self, material):
+        Door.door_price(material)
 
-    def update_wood_price(self):
-        pass
+    def update_wood_price(self, new_wood_price):
+        Door.update_wood_price(new_wood_price)
 
-    def update_metal_price(self):
-        pass
+    def update_metal_price(self, new_metal_price):
+        Door.update_metal_price(new_metal_price)
 
     def get_roof_square(self):
-        pass
+        Roof.roof_square(self.__roof)
 
     def get_walls_square(self):
-        pass
+        return sum([Wall.wall_square(wall) for wall in self.__walls])
 
     def get_windows_square(self):
-        pass
+        return sum([Window.window_square(window) for window in self.__windows])
 
     def get_door_square(self):
-        pass
+        Door.door_square(self.__door)
 
-    def get_number_of_rolls_of_wallpapers(self):
-        pass
+    def get_number_of_rolls_of_wallpapers(self, roll_width_m, roll_length_m):
+        if (roll_width_m and roll_length_m) == 0:
+            raise ValueError("Sorry length must be not 0")
+        else:
+            return sum([Wall.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m) for _ in self.__walls])
 
     def get_room_square(self):
-        pass
+        return self.get_walls_square() - self.get_windows_square() - self.get_door_square()
+
+
