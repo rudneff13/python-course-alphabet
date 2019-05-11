@@ -1,0 +1,9 @@
+{
+    "__class__": "Car",
+    "__module__": "__main__",
+    "price": 1001.0,
+    "type": "Diesel",
+    "producer": "BMW",
+    "number": "a213b9f84c414863901f617700d82dbf",
+    "mileage": 1123.0
+}
