@@ -1,0 +1,27 @@
+{
+    "__class__": "Garage",
+    "__module__": "__main__",
+    "town": "Kiev",
+    "cars": [
+        {
+            "__class__": "Car",
+            "__module__": "__main__",
+            "price": 1001.0,
+            "type": "Diesel",
+            "producer": "BMW",
+            "number": "a213b9f84c414863901f617700d82dbf",
+            "mileage": 1123.0
+        },
+        {
+            "__class__": "Car",
+            "__module__": "__main__",
+            "price": 2000.0,
+            "type": "Crossover",
+            "producer": "BENTLEY",
+            "number": "cbdb3e1e59bb49488f33939ec444aaa4",
+            "mileage": 5422.0
+        }
+    ],
+    "places": 2,
+    "owner": null
+}
