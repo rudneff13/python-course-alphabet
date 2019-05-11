@@ -179,8 +179,8 @@ class Wall:
 
     def number_of_rolls_of_wallpaper(self, roll_width_m, roll_length_m):
         lines_in_roll = m.floor(roll_length_m / self.height)
-        lines_for_wall = m.ceil(self.width / roll_width_m)
-        return m.ceil(lines_for_wall / lines_in_roll)
+        lines_for_wall = m.floor(self.width / roll_width_m)
+        return lines_for_wall / lines_in_roll
 
 
 class Roof:
@@ -365,8 +365,7 @@ class House:
             if (width and height) == 0:
                 raise ValueError("Value must be not 0")
             else:
-                new_door = Door(width, height)
-                self.__door = new_door
+                self.__door = Door(width, height)
                 return self.__door
         else:
             raise ValueError("The house can not have two doors")
@@ -378,16 +377,16 @@ class House:
         return len(self.__windows)
 
     def get_door_price(self, material):
-        Door.door_price(material)
+        return self.__door.door_price(material)
 
     def update_wood_price(self, new_wood_price):
-        Door.update_wood_price(new_wood_price)
+        return self.__door.update_wood_price(new_wood_price)
 
     def update_metal_price(self, new_metal_price):
-        Door.update_metal_price(new_metal_price)
+        return self.__door.update_metal_price(new_metal_price)
 
     def get_roof_square(self):
-        Roof.roof_square(self.__roof)
+        return self.__roof.roof_square()
 
     def get_walls_square(self):
         return sum([Wall.wall_square(wall) for wall in self.__walls])
@@ -396,13 +395,13 @@ class House:
         return sum([Window.window_square(window) for window in self.__windows])
 
     def get_door_square(self):
-        Door.door_square(self.__door)
+        return self.__door.door_square()
 
     def get_number_of_rolls_of_wallpapers(self, roll_width_m, roll_length_m):
         if (roll_width_m and roll_length_m) == 0:
             raise ValueError("Sorry length must be not 0")
         else:
-            return sum([Wall.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m) for _ in self.__walls])
+            return sum([wall.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m) for wall in self.__walls])
 
     def get_room_square(self):
         return self.get_walls_square() - self.get_windows_square() - self.get_door_square()
