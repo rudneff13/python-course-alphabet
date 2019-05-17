@@ -55,21 +55,16 @@ class Cat:
         if product in product_dict.keys():
             self.saturation_level = [self._increase_saturation_level(v)
                                      for k, v in product_dict.items() if product == k][0]
-        return self.saturation_level
 
     def _reduce_saturation_level(self, value):
         self.saturation_level -= value
         if self.saturation_level < 0:
             self.saturation_level = 0
-            return self.saturation_level
-        else:
-            return self.saturation_level
 
     def _increase_saturation_level(self, value):
         self.saturation_level += value
         if self.saturation_level > 100:
             self.saturation_level = 100
-            return self.saturation_level
         else:
             return self.saturation_level
 
@@ -138,7 +133,6 @@ class Cheetah(Cat):
         if product in product_dict.keys():
             self.saturation_level = [self._increase_saturation_level(v)
                                      for k, v in product_dict.items() if product == k][0]
-        return self.saturation_level
 
     def _set_average_speed(self):
         if self.age <= 5:
@@ -150,9 +144,7 @@ class Cheetah(Cat):
         return self.average_speed
 
     def __str__(self):
-        return f"""
-    Current cheetah is {self.age} years old.
-        """
+        return """Current cheetah is {self.age} years old."""
 
 
 class Wall:
@@ -334,7 +326,7 @@ class House:
 
     def create_wall(self, width, height):
         if len(self.__walls) < 4:
-            if (width and height) == 0:
+            if (width or height) == 0:
                 raise ValueError("Value must be not 0")
             else:
                 new_wall = Wall(width, height)
@@ -344,7 +336,7 @@ class House:
 
     def create_roof(self, width, height, roof_type):
         if self.__roof is None:
-            if (width and height) == 0:
+            if (width or height) == 0:
                 raise ValueError("Value must be not 0")
             else:
                 new_roof = Roof(width, height, roof_type)
@@ -354,7 +346,7 @@ class House:
             raise ValueError("The house can not have two roofs")
 
     def create_window(self, width, height):
-        if (width and height) == 0:
+        if (width or height) == 0:
             raise ValueError("Value must be not 0")
         else:
             new_window = Window(width, height)
@@ -362,7 +354,7 @@ class House:
 
     def create_door(self, width, height):
         if self.__door is None:
-            if (width and height) == 0:
+            if (width or height) == 0:
                 raise ValueError("Value must be not 0")
             else:
                 self.__door = Door(width, height)
@@ -398,7 +390,7 @@ class House:
         return self.__door.door_square()
 
     def get_number_of_rolls_of_wallpapers(self, roll_width_m, roll_length_m):
-        if (roll_width_m and roll_length_m) == 0:
+        if (roll_width_m or roll_length_m) == 0:
             raise ValueError("Sorry length must be not 0")
         else:
             return sum([wall.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m) for wall in self.__walls])
