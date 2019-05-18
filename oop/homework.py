@@ -105,9 +105,7 @@ class Cat:
         return self.average_speed
 
     def __str__(self):
-        return f"""
-    Current cat is {self.age} years old.
-        """
+        return f"Current cat is {self.age} years old."
 
 
 class Cheetah(Cat):
@@ -144,7 +142,7 @@ class Cheetah(Cat):
         return self.average_speed
 
     def __str__(self):
-        return """Current cheetah is {self.age} years old."""
+        return f"Current cheetah is {self.age} years old."
 
 
 class Wall:
