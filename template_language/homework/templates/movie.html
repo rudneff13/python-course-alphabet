@@ -11,15 +11,34 @@
             {{ movie.plot }}
         </p>
         <p class="card-text">
-            <span class="font-weight-bold">Year: </span><span>{{ movie.year }}</span><br>
-            <span class="font-weight-bold">Production: </span><span>{{ movie.production }}v</span><br>
-            <span class="font-weight-bold">Director: </span><span>{{ movie.director }}</span><br>
-            <span class="font-weight-bold">Actors: </span><span>{{ movie.actors }}</span><br>
-            <span class="font-weight-bold">Awards: </span><span>{{ movie.awards }}</span><br>
-            <span class="font-weight-bold">Runtime: </span><span>{{ movie.runtime }}</span><br>
-            <span class="font-weight-bold">IMDb Rating: </span><span>{{ movie.imdbRating }}</span><br>
-            <span class="font-weight-bold">Box Office: </span><span>{{ movie.boxOffice }}</span><br>
-            <span class="font-weight-bold">Website: </span><a href={{ movie.website }}>{{ movie.website }}</a><br>
+{#            <span class="font-weight-bold">Year: </span><span>{{ movie.year }}</span><br>#}
+{#            <span class="font-weight-bold">Production: </span><span>{{ movie.production }}v</span><br>#}
+{#            <span class="font-weight-bold">Director: </span><span>{{ movie.director }}</span><br>#}
+{#            <span class="font-weight-bold">Actors: </span><span>{{ movie.actors }}</span><br>#}
+{#            <span class="font-weight-bold">Awards: </span><span>{{ movie.awards }}</span><br>#}
+{#            <span class="font-weight-bold">Runtime: </span><span>{{ movie.runtime }}</span><br>#}
+{#            <span class="font-weight-bold">IMDb Rating: </span><span>{{ movie.imdbRating }}</span><br>#}
+{#            <span class="font-weight-bold">Box Office: </span><span>{{ movie.boxOffice }}</span><br>#}
+{#            <span class="font-weight-bold">Website: </span><a href={{ movie.website }}>{{ movie.website }}</a><br>#}
+            {% set params = {
+            'Year': movie.year,
+            'Production': movie.production,
+            'Director': movie.director,
+            'Actors': movie.actors,
+            'Awards': movie.awards,
+            'Runtime': movie.runtime,
+            'IMDb Rating': movie.imdbRating,
+            'Box Office': movie.boxOffice,
+            'Website': movie.website
+             } %}
+
+            {% for key, value in params.items() %}
+                {% if key != 'Website' %}
+            <span class="font-weight-bold">{{key}}: </span><span>{{value}}</span><br>
+                {% else %}
+            <span class="font-weight-bold">{{key}}: </span><span><a href={{value}}>{{value}}</a></span><br>
+                {% endif %}
+            {% endfor %}
         </p>
     </div>
 </div>
