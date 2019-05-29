@@ -19,7 +19,7 @@ Advanced
 """
 
 
-from objects_and_classes.homework import constants as c
+import constants
 import uuid
 from functools import reduce
 import json
@@ -71,6 +71,12 @@ class Cesar:
         obj_dict.update({'garages': garages_serialized})
         return obj_dict
 
+    def cesar_equality(self, other):
+        if (str(self.name) == str(other.name)
+                and (self.garages == other.garages or self.garages is None or other.garages is None)
+                and self.register_id == other.register_id):
+            return True
+
     def __str__(self):
         return f"""
         Attributes of current Cesar:
@@ -80,7 +86,7 @@ class Cesar:
         """
 
     def __repr__(self):
-        return f"""Cesar(name='{self.name}', garages='{len(self.garages)}')"""
+        return f"""Cesar(name='{self.name}', garages='{len(self.garages)}', register_id: '{self.register_id}')"""
 
     def __gt__(self, other):
         return self.hit_hat() > other.hit_hat()
@@ -103,7 +109,7 @@ class Cesar:
 
 class Car:
     def __init__(self, price, type, producer, mileage, number=None):
-        if type in c.CARS_TYPES and producer in c.CARS_PRODUCER:
+        if type in constants.CARS_TYPES and producer in constants.CARS_PRODUCER:
             self.price = float(price)
             self.type = type
             self.producer = producer
@@ -114,18 +120,25 @@ class Car:
 
     def change_number(self, new_number):
         try:
-            uuid.UUID(new_number, version=4)
-            self.number = new_number
+            self.number = uuid.UUID(new_number, version=4)
         except (ValueError, AttributeError, TypeError):
             print("It's not UUID number!")
 
     def obj_to_dict(self):
         obj_dict = {
             "__class__": self.__class__.__name__,
-            "__module__": self.__module__
+            "__module__": self.__module__,
         }
         obj_dict.update(self.__dict__)
         return obj_dict
+
+    def car_equality(self, other):
+        if (self.price == other.price
+                and self.type == other.type
+                and self.producer == other.producer
+                and self.number == other.number
+                and self.mileage == other.mileage):
+            return True
 
     def __str__(self):
         return f"""
@@ -161,7 +174,7 @@ class Car:
 
 class Garage:
     def __init__(self, town, cars, places, owner=None):
-        if town in c.TOWNS:
+        if town in constants.TOWNS:
             self.town = town
             self.cars = cars
             self.places = int(places)
@@ -207,6 +220,13 @@ class Garage:
         obj_dict.update({'cars': cars_serialized})
         return obj_dict
 
+    def garage_equality(self, other):
+        if (self.town == other.town
+                and self.cars == other.cars
+                and int(self.places) == int(other.places)
+                and self.owner == other.owner):
+            return True
+
     def __str__(self):
         return f"""
         Attributes of current Garage:
@@ -219,6 +239,23 @@ class Garage:
     def __repr__(self):
         return f"""Garage(town='{self.town}', cars='{len(self.cars)}', places='{self.places}', owner='{self.owner}')"""
 
+    def __gt__(self, other):
+        return self.cars > other.cars
+
+    def __lt__(self, other):
+        return self.cars < other.cars
+
+    def __ge__(self, other):
+        return self.cars >= other.cars
+
+    def __le__(self, other):
+        return self.cars <= other.cars
+
+    def __eq__(self, other):
+        return self.cars == other.cars
+
+    def __ne__(self, other):
+        return self.cars != other.cars
 
 class JsonEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -250,7 +287,9 @@ if __name__ == "__main__":
     garage2 = Garage('Prague', [car2], 12, )
     garage3 = Garage('Prague', [car2, car1], 10, )
     cesar1 = Cesar("Crappy", [garage1, garage2, garage3])
-    cesar2 = Cesar("Another guy", [garage1])
+    cesar2 = Cesar("Another guy", [garage1], '7639f8d6-fb5e-4848-ad96-bba2a7a061ae')
+    cesar3 = Cesar("Another guy", [garage1], '7639f8d6-fb5e-4848-ad96-bba2a7a061ae')
+    
 
 
 # print('_____________________________json dump/load_____________________________')
@@ -275,11 +314,13 @@ if __name__ == "__main__":
 
 
 # print('_____________________________json dumps/loads_____________________________')
-
+#
 # car1_with_dupms = json.dumps(car1.obj_to_dict(), cls=JsonEncoder, indent=4)
-# print(car1_with_dupms)
+# print((car1))
+# print((car1_with_dupms))
 # decoding_car1_with_loads = json.loads(car1_with_dupms, object_hook=dict_to_obj)
-# print(decoding_car1_with_loads)
+# print((decoding_car1_with_loads))
+
 
 # garage1_with_dupms = json.dumps(garage1.obj_to_dict(), cls=JsonEncoder, indent=4)
 # print(garage1_with_dupms)
@@ -334,4 +375,3 @@ if __name__ == "__main__":
 # with open("cesar1.yaml", "r") as file:
 #     cesar1_with_yaml = yaml.load(file)
 # print(cesar1_with_yaml)
-
