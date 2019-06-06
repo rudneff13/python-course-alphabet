@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+{% block title %} Fruits {% endblock title%}
+{% block content %}
+    <h3>Welcome to our Fruits list of Rudniev_Official_Website: </h3>
+<ul>
+    <li><a href="{{ url_for("main.go_main") }}"> Go back to Main</a></li>
+</ul>
+    {% for fruit in values %}
+    <p>{{ fruit }}</p>
+    {% endfor %}
+<br/>
+<br/>
+<br/>
+<br/>
+<p>Now it's time to relax and have some fun at
+    <button><a href="{{ url_for("main.redirect_to_pornhub") }}">PornHub.com </a></button></p>
+
+{% endblock content %}
