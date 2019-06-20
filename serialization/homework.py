@@ -314,13 +314,12 @@ if __name__ == "__main__":
 
 
 # print('_____________________________json dumps/loads_____________________________')
-#
+
 # car1_with_dupms = json.dumps(car1.obj_to_dict(), cls=JsonEncoder, indent=4)
 # print((car1))
 # print((car1_with_dupms))
 # decoding_car1_with_loads = json.loads(car1_with_dupms, object_hook=dict_to_obj)
 # print((decoding_car1_with_loads))
-
 
 # garage1_with_dupms = json.dumps(garage1.obj_to_dict(), cls=JsonEncoder, indent=4)
 # print(garage1_with_dupms)
