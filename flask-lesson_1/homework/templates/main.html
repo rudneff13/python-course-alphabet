@@ -1,0 +1,9 @@
+{% extends "base_template.html" %}
+{% block title %} Main {% endblock title%}
+{% block content %}
+    <h3>Welcome to our Main page of Rudniev_Official_Website: </h3>
+<ul>
+    <li><a href="{{ url_for("fruits.fruits_get") }}"> To the Fruits list!</a></li> <br/>
+    <li><a href="{{ url_for("vegetables.vegetables_get") }}"> To the Vegetables list!</a></li>
+</ul>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+{% block title %} Vegetables {% endblock title%}
+{% block content %}
+    <h3>Welcome to our Vegetables list of Rudniev_Official_Website: </h3>
+<ul>
+    <br>
+    <br>
+    <li><a href="/"> Go back to Main</a></li>
+</ul>
+    {% for vegetable in values %}
+    <p>{{ vegetable }}</p>
+    {% endfor %}
+<br/>
+<br/>
+<br/>
+<br/>
+<p>Now lets test our error-handler: <button><a href="{{ 'www.this_site_never_existed.com' }}">Error? </a></button></p>
+{% endblock content %}
